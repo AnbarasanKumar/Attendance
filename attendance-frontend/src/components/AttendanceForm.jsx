@@ -16,15 +16,40 @@ export default function AttendanceForm({ studentId, onMarked }) {
 
   return (
     <div>
-      <h3>Mark Attendance</h3>
-      <input type="date" onChange={e => setDate(e.target.value)} />
 
-      <select onChange={e => setPresent(e.target.value === "true")}>
-        <option value="true">Present</option>
-        <option value="false">Absent</option>
-      </select>
+      <h5 className="fw-semibold mb-3 text-primary">
+        📝 Mark Attendance
+      </h5>
 
-      <button onClick={submit}>Mark</button>
+      <div className="mb-3">
+        <label className="form-label">Date</label>
+        <input
+          type="date"
+          className="form-control"
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+
+      <div className="mb-3">
+        <label className="form-label">Status</label>
+        <select
+          className="form-select"
+          onChange={(e) => setPresent(e.target.value === "true")}
+        >
+          <option value="true">Present</option>
+          <option value="false">Absent</option>
+        </select>
+      </div>
+
+      <div className="d-grid">
+        <button
+          className="btn btn-warning"
+          onClick={submit}
+        >
+          Mark Attendance
+        </button>
+      </div>
+
     </div>
   );
 }

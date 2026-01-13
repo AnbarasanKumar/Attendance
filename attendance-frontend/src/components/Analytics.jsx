@@ -43,38 +43,96 @@ export default function Analytics({ attendance, marks }) {
   }));
 
   return (
-    <div style={{ marginTop: 30 }}>
-      <h2>📊 Analytics Dashboard</h2>
+    <div className="mt-4">
 
-      {/* Attendance Summary */}
-      <h3>Attendance Percentage</h3>
-      <h1>{attendancePercent}%</h1>
+      <h4 className="fw-bold mb-4 text-primary">
+        📊 Analytics Dashboard
+      </h4>
 
-      {/* Attendance Pie Chart */}
-      <PieChart width={300} height={300}>
-        <Pie
-          data={attendanceData}
-          dataKey="value"
-          nameKey="name"
-          outerRadius={100}
-          label
-        >
-          {attendanceData.map((_, index) => (
-            <Cell key={index} fill={COLORS[index]} />
-          ))}
-        </Pie>
-        <Tooltip />
-      </PieChart>
+      {/* KPI SUMMARY */}
+      <div className="row g-4 mb-4">
+        <div className="col-md-4">
+          <div className="card shadow-sm text-center">
+            <div className="card-body">
+              <h6 className="text-muted">Attendance Percentage</h6>
+              <h1 className="fw-bold text-success">
+                {attendancePercent}%
+              </h1>
+            </div>
+          </div>
+        </div>
 
-      {/* Marks Bar Chart */}
-      <h3>Marks Average (Subject-wise)</h3>
-      <BarChart width={500} height={300} data={marksData}>
-        <XAxis dataKey="subject" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="average" />
-      </BarChart>
+        <div className="col-md-4">
+          <div className="card shadow-sm text-center">
+            <div className="card-body">
+              <h6 className="text-muted">Present Days</h6>
+              <h2 className="fw-bold text-success">
+                {presentDays}
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="card shadow-sm text-center">
+            <div className="card-body">
+              <h6 className="text-muted">Absent Days</h6>
+              <h2 className="fw-bold text-danger">
+                {absentDays}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CHARTS */}
+      <div className="row g-4">
+
+        {/* ATTENDANCE PIE */}
+        <div className="col-lg-5">
+          <div className="card shadow-sm h-100">
+            <div className="card-header fw-semibold">
+              Attendance Overview
+            </div>
+            <div className="card-body d-flex justify-content-center">
+              <PieChart width={300} height={300}>
+                <Pie
+                  data={attendanceData}
+                  dataKey="value"
+                  nameKey="name"
+                  outerRadius={100}
+                  label
+                >
+                  {attendanceData.map((_, index) => (
+                    <Cell key={index} fill={COLORS[index]} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </div>
+          </div>
+        </div>
+
+        {/* MARKS BAR */}
+        <div className="col-lg-7">
+          <div className="card shadow-sm h-100">
+            <div className="card-header fw-semibold">
+              Subject-wise Average Marks
+            </div>
+            <div className="card-body d-flex justify-content-center">
+              <BarChart width={500} height={300} data={marksData}>
+                <XAxis dataKey="subject" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="average" />
+              </BarChart>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   );
 }
